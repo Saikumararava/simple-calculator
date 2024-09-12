@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculator</title>
+</head>
+<body>
+    <h1>SIMPLE CALCULATOR</h1>
+    <script>
+        function performOperation(operation, num1, num2) {
+  switch (operation) {
+    case "add":
+      return num1 + num2;
+    case "subtract":
+      return num1 - num2;
+    case "multiply":
+      return num1 * num2;
+    case "divide":
+      if (num2 === 0) {
+        return "Cannot divide by zero.";
+      } else {
+        return num1 / num2;
+      }
+    default:
+      return "Invalid operation.";
+  }
+}
+
+function getUserInput() {
+  const operation = prompt("Enter the operation (add, subtract, multiply, divide):");
+  const num1 = parseFloat(prompt("Enter the first number:"));
+  const num2 = parseFloat(prompt("Enter the second number:"));
+  return { operation, num1, num2 };
+}
+
+function displayResult(result) {
+  alert(result);
+}
+
+function displayHistory(calculationHistory) {
+  console.log("Calculation History:");
+  for (let i = 0; i < calculationHistory.length; i++) {
+    console.log(calculationHistory[i]);
+  }
+}
+
+const calculationHistory = [];
+
+while (true) {
+  const { operation, num1, num2 } = getUserInput();
+  const result = performOperation(operation, num1, num2);
+  displayResult(result);
+
+  calculationHistory.push(`${num1} ${operation} ${num2} = ${result}`);
+
+  const continueChoice = prompt("Do you want to perform another calculation? (yes/no)");
+  if (continueChoice.toLowerCase() !== "yes") {
+    break;
+  }
+}
+    </script>
+</body>
+</html>
